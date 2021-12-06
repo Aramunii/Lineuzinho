@@ -1,0 +1,13 @@
+{
+  "start": "node --experimental-modules src/index.mjs ",
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.10.3",
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
+    "dateformat": "^5.0.2",
+    "fetch": "^1.1.0",
+    "node-fetch": "^3.1.0",
+    "path": "^0.12.7",
+    "sulla": "^2.4.0"
+  }
+}
