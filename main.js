@@ -102,7 +102,7 @@ async function start(client) {
         var last2 = body.slice(-2);
         if (last2 == 'ão' || last2 == 'ao') {
           sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
-        }else if(last2 == 'to' || last2 == 'to'){
+        }else if(last2 == 'sto' || last2 == 'sto'){
           sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
         }
 
