@@ -83,7 +83,19 @@ async function start(client) {
         attackEnemy(client, message)
       } else if (body.includes('#jojo')) {
         createMenuJojo(client, message);
-      };
+      }else if(body.includes('#desciclopedia'))
+      {
+        var response = await axios.get('http://desciclopedia.org/wiki/Especial:Aleat%C3%B3ria')
+
+        var $ = cheerio.load(response.data);
+        
+        var title = $('.firstHeading').text();
+        var content = $('.mw-parser-output').text();
+    
+        var text = `*${title}* \n\n ${content} \n\n`
+
+        sendMessage(client,message,text,'📚🤪 DESCICLOPÉDIA 🤪📚')
+      }
 
     } catch (error) {
       console.log(error);
