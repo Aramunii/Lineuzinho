@@ -7,6 +7,8 @@ const Stand = require('./stand.js');
 const Cat = require('./cat.js');
 const Path = require('path')
 const ApiRequest = require('./api.js');
+const cheerio = require('cheerio');
+
 var user = [];
 
 wppconnect
@@ -96,7 +98,7 @@ async function start(client) {
 
         sendMessage(client, message, text, '📚🤪 DESCICLOPÉDIA 🤪📚')
       } else if (body.includes('#gato')) {
-        await cat.data.getCat()
+        await Cat.data.getCat()
         sendImageName(client, message, 'gato.jpg')
       }
 
