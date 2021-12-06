@@ -104,7 +104,10 @@ async function start(client) {
           sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
         }else if(last2 == 'sto' || last2 == 'sto' || last2 == 'uto'){
           sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
+        }else if(last2 == 'ssa' || last2 == 'ssa' || last2 == 'ssa'){
+          sendMessageNormal(client, message, '*Meu pau te atravessa!*', '');
         }
+
 
       }
 
