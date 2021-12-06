@@ -4,6 +4,7 @@ const movieRandom = require('./movie.js');
 const gameSearch = require('./game.js');
 const Steam = require('./steam.js');
 const Stand = require('./stand.js');
+const Cat = require('./cat.js');
 const Path = require('path')
 const ApiRequest = require('./api.js');
 var user = [];
@@ -95,27 +96,7 @@ async function start(client) {
 
         sendMessage(client, message, text, '📚🤪 DESCICLOPÉDIA 🤪📚')
       } else if (body.includes('#gato')) {
-
-        var response = await axios.get('https://cataas.com/cat/cute', {
-          responseType: 'arraybuffer'
-        })
-
-        await client
-          .sendImageFromBase64(
-            message.from,
-            text.img_link,
-            'gatinho.jfif',
-            '',
-            message.id.toString()
-          )
-          .then((result) => {
-            console.log('Result: ', result); //return object success
-          })
-          .catch((erro) => {
-            sendMessage(client, message, 'Ocorreu um erro tente novamente mais tarde! ou reporte o erro!')
-            console.error('Error when sending: ', erro); //return object error
-          });
-
+        sendImageName(client,message,'gato.jpg')
       }
 
     } catch (error) {
@@ -955,6 +936,24 @@ async function sendMessageOptionsEnemy(client, message, textMenu, options) {
   });
 
 
+}
+
+async function sendImageName(client, message, image) {
+  await client
+    .sendImage(
+      message.from,
+      Path.resolve(__dirname, 'images', image),
+      'img.jpg',
+      '\n\n 🥸 ```Lineuzinho```',
+      message.id.toString()
+    )
+    .then((result) => {
+      console.log('Result: ', result); //return object success
+    })
+    .catch((erro) => {
+      sendMessage(client, message, 'Ocorreu um erro tente novamente mais tarde! ou reporte o erro!')
+      console.error('Error when sending: ', erro); //return object error
+    });
 }
 
 async function sendImage(client, message, text) {
