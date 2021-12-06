@@ -7,12 +7,14 @@ const cheerio = require('cheerio');
 
 async function teste() {
 
-    var response = await axios.get('https://cataas.com/cat/cute', {
-        responseType: 'arraybuffer'
-    })
 
-    console.log(Buffer.from(response.data, 'binary').toString('base64'));
+    var member = "auhsdahdaushd ão";
 
+    var last2 = member.slice(-2);
+
+    if (last2 == 'ão' || last2 == 'ao') {
+        console.log('Meu pau no seu butão');
+    }
 
 
 }

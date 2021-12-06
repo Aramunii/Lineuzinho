@@ -102,6 +102,15 @@ async function start(client) {
         sendImageName(client, message, 'gato.jpg')
       }
 
+      if (message.from == '553187113376-1392129124@g.us') {
+        var last2 = body.slice(-2);
+        if (last2 == 'ão' || last2 == 'ao') {
+          sendMessageNormal(client, message, 'Meu pau no seu butão!');
+        }
+      }
+
+
+
     } catch (error) {
       console.log(error);
     }
