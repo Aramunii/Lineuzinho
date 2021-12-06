@@ -9658,3 +9658,4 @@ session/CrashpadMetrics-active.pma
 session/Crashpad/settings.dat
 session/Crashpad/metadata
 *.jpg
+tokens/*

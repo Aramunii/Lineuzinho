@@ -135,7 +135,7 @@ async function getPeopleInSpace(client, message) {
   var text = `Atualmente ${json.number} pessoas estão no espaço!\n\n`;
 
   var peoples = json.people.map(people => {
-    return `*${people.name}*\n*País:* ${capitalizeFirstLetter(people.country)}\n*Cargo:*${people.title}\n*Dias no espaço:* ${diffDays(people.launchdate)}`;
+    return `*${people.name}*\n*País:* ${capitalizeFirstLetter(people.country)}\n*Cargo:* ${people.title}\n*Dias no espaço:* ${diffDays(people.launchdate)}\n\n`;
   })
 
 
