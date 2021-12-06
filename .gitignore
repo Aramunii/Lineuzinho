@@ -1,5 +1,5 @@
 
-node_modules/.bin/atob
+node_modules/*
 node_modules/.bin/atob.cmd
 node_modules/.bin/atob.ps1
 node_modules/.bin/detect-libc

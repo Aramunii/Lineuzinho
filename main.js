@@ -8,6 +8,7 @@ const Cat = require('./cat.js');
 const Path = require('path')
 const ApiRequest = require('./api.js');
 const cheerio = require('cheerio');
+const translate = require('translate');
 
 var user = [];
 
@@ -87,25 +88,18 @@ async function start(client) {
       } else if (body.includes('#jojo')) {
         createMenuJojo(client, message);
       } else if (body.includes('#desciclopedia')) {
-        var response = await axios.get('http://desciclopedia.org/wiki/Especial:Aleat%C3%B3ria')
-
-        var $ = cheerio.load(response.data);
-
-        var title = $('.firstHeading').text();
-        var content = $('.mw-parser-output').text();
-
-        var text = `*${title}* \n\n ${content} \n\n`
-
-        sendMessage(client, message, text, '📚🤪 DESCICLOPÉDIA 🤪📚')
+        desciclopedia(client, message);
       } else if (body.includes('#gato')) {
         await Cat.data.getCat()
         sendImageName(client, message, 'gato.jpg')
+      } else if (body.includes('#inutil')) {
+        getRandomFact(client, message);
       }
 
       if (message.from == '553187113376-1392129124@g.us') {
         var last2 = body.slice(-2);
         if (last2 == 'ão' || last2 == 'ao') {
-          sendMessageNormal(client, message, 'Meu pau no seu butão!','');
+          sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
         }
       }
 
@@ -119,6 +113,25 @@ async function start(client) {
 
 
   });
+}
+
+async function getRandomFact() {
+  var response = await axios.get('https://uselessfacts.jsph.pl/random.json?language=en');
+  const text = await translate(response.data.text, "pt");
+  sendMessage(client, message, text, '📚 UM FATO INÚTIL 📚')
+}
+
+async function desciclopedia(client, message) {
+  var response = await axios.get('http://desciclopedia.org/wiki/Especial:Aleat%C3%B3ria')
+
+  var $ = cheerio.load(response.data);
+
+  var title = $('.firstHeading').text();
+  var content = $('.mw-parser-output').text();
+
+  var text = `*${title}* \n\n ${content} \n\n`
+
+  sendMessage(client, message, text, '📚🤪 DESCICLOPÉDIA 🤪📚')
 }
 
 async function attackEnemy(client, message) {

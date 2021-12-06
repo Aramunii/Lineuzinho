@@ -4,18 +4,11 @@ const fs = require('fs');
 const axios = require('axios');
 const Path = require('path')
 const cheerio = require('cheerio');
-
+const translate = require('translate');
 async function teste() {
 
-
-    var member = "auhsdahdaushd ão";
-
-    var last2 = member.slice(-2);
-
-    if (last2 == 'ão' || last2 == 'ao') {
-        console.log('Meu pau no seu butão');
-    }
-
+     var response = await axios.get('https://uselessfacts.jsph.pl/random.json?language=en');
+     const text = await translate(response.data.text, "pt");
 
 }
 
