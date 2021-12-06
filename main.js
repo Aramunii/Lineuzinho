@@ -83,18 +83,39 @@ async function start(client) {
         attackEnemy(client, message)
       } else if (body.includes('#jojo')) {
         createMenuJojo(client, message);
-      }else if(body.includes('#desciclopedia'))
-      {
+      } else if (body.includes('#desciclopedia')) {
         var response = await axios.get('http://desciclopedia.org/wiki/Especial:Aleat%C3%B3ria')
 
         var $ = cheerio.load(response.data);
-        
+
         var title = $('.firstHeading').text();
         var content = $('.mw-parser-output').text();
-    
+
         var text = `*${title}* \n\n ${content} \n\n`
 
-        sendMessage(client,message,text,'📚🤪 DESCICLOPÉDIA 🤪📚')
+        sendMessage(client, message, text, '📚🤪 DESCICLOPÉDIA 🤪📚')
+      } else if (body.includes('#gato')) {
+
+        var response = await axios.get('https://cataas.com/cat/cute', {
+          responseType: 'arraybuffer'
+        })
+
+        await client
+          .sendImageFromBase64(
+            message.from,
+            text.img_link,
+            'gatinho.jfif',
+            '',
+            message.id.toString()
+          )
+          .then((result) => {
+            console.log('Result: ', result); //return object success
+          })
+          .catch((erro) => {
+            sendMessage(client, message, 'Ocorreu um erro tente novamente mais tarde! ou reporte o erro!')
+            console.error('Error when sending: ', erro); //return object error
+          });
+
       }
 
     } catch (error) {

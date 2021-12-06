@@ -7,14 +7,13 @@ const cheerio = require('cheerio');
 
 async function teste() {
 
-    var response = await axios.get('http://desciclopedia.org/wiki/Especial:Aleat%C3%B3ria')
+    var response = await axios.get('https://cataas.com/cat/cute', {
+        responseType: 'arraybuffer'
+    })
 
-    var $ = cheerio.load(response.data);
-    
-    var title = $('.firstHeading').text();
-    var content = $('.mw-parser-output').text();
+    console.log(Buffer.from(response.data, 'binary').toString('base64'));
 
-    console.log(title , content);
+
 
 }
 
