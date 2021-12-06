@@ -102,7 +102,10 @@ async function start(client) {
         var last2 = body.slice(-2);
         if (last2 == 'ão' || last2 == 'ao') {
           sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
+        }else if(last2 == 'to' || last2 == 'to'){
+          sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
         }
+
       }
 
 
@@ -132,7 +135,7 @@ function diffDays(date) {
 async function getPeopleInSpace(client, message) {
   var response = await axios.get('https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json');
   var json = response.data;
-  var text = `Atualmente ${json.number} pessoas estão no espaço!\n\n`;
+  var text = `Atualmente *${json.number}* pessoas estão no espaço!\n\n`;
 
   var peoples = json.people.map(people => {
     return `*${people.name}*\n*País:* ${capitalizeFirstLetter(people.country)}\n*Cargo:* ${people.title}\n*Dias no espaço:* ${diffDays(people.launchdate)}\n\n`;
