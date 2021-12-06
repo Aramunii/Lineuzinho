@@ -6,7 +6,7 @@ var methods = {};
 
 methods.getCat = async function getRandom() {
 
-    var img = await downloadImage());
+    var img = await downloadImage();
 
     return img;
 }
