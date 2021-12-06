@@ -98,7 +98,7 @@ async function start(client) {
         getPeopleInSpace(client, message);
       }
 
-      if (message.from == '553187113376-1392129124@g.us') {
+      if (message.from == '553187113376-1392129124@g.us' || message.from =='553195566348-1586988509@g.us') {
         var last2 = body.slice(-2);
         var last3 = body.slice(-3);
         if (last2 == 'ão' || last2 == 'ao') {
