@@ -100,11 +100,12 @@ async function start(client) {
 
       if (message.from == '553187113376-1392129124@g.us') {
         var last2 = body.slice(-2);
+        var last3 = body.slice(-3);
         if (last2 == 'ão' || last2 == 'ao') {
           sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
-        }else if(last2 == 'sto' || last2 == 'sto' || last2 == 'uto'){
+        }else if(last3 == 'sto' || last2 == 'sto' || last3 == 'uto'){
           sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
-        }else if(last2 == 'ssa' || last2 == 'ssa' || last2 == 'ssa'){
+        }else if(last3 == 'last3' || last3 == 'ssa?' || last3 == 'ssa'){
           sendMessageNormal(client, message, '*Meu pau te atravessa!*', '');
         }
 
