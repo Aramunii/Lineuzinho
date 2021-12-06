@@ -94,6 +94,8 @@ async function start(client) {
         sendImageName(client, message, 'gato.jpg')
       } else if (body.includes('#inutil')) {
         getRandomFact(client, message);
+      } else if (body.includes('#espaço')) {
+        getPeopleInSpace(client, message);
       }
 
       if (message.from == '553187113376-1392129124@g.us') {
@@ -102,7 +104,6 @@ async function start(client) {
           sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
         }
       }
-
 
 
     } catch (error) {
@@ -115,7 +116,36 @@ async function start(client) {
   });
 }
 
-async function getRandomFact() {
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function diffDays(date) {
+  const date1 = new Date(date);
+  const date2 = new Date();
+  const diffTime = Math.abs(date2 - date1);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  return diffDays + ' dias';
+}
+
+async function getPeopleInSpace(client, message) {
+  var response = await axios.get('https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json');
+  var json = response.data;
+  var text = `Atualmente ${json.number} pessoas estão no espaço!\n\n`;
+
+  var peoples = json.people.map(people => {
+    return `*${people.name}*\n*País:* ${capitalizeFirstLetter(people.country)}\n*Cargo:*${people.title}\n*Dias no espaço:* ${diffDays(people.launchdate)}`;
+  })
+
+
+  text += peoples.join('\n');
+
+  sendMessage(client, message, text, '👩🏻‍🚀 PESSOAS NO ESPAÇO 🚀')
+
+}
+
+async function getRandomFact(client, message) {
   var response = await axios.get('https://uselessfacts.jsph.pl/random.json?language=en');
   const text = await translate(response.data.text, "pt");
   sendMessage(client, message, text, '📚 UM FATO INÚTIL 📚')
@@ -809,6 +839,9 @@ async function createMenuEntertain(client, message) {
 - *#decida* opcão1,opção2,opção3 - Decide para você entre as opções.
 - *#megasena* - Retorna os números para jogar na mega!. 
 - *#jogodobicho* - Retorna os números para jogar na mega!. 
+- *#gato* - Envia uma foto de um gato!.
+- *#inutil* - Envia um Fato inutil da vida.
+- *#desciclopedia* - Envia um artigo da desciclopedia.
 
   `
   sendMessage(client, message, textMenu, '🎲 Diversão 🎲')
