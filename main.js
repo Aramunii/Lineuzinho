@@ -96,7 +96,8 @@ async function start(client) {
 
         sendMessage(client, message, text, '📚🤪 DESCICLOPÉDIA 🤪📚')
       } else if (body.includes('#gato')) {
-        sendImageName(client,message,'gato.jpg')
+        await cat.data.getCat()
+        sendImageName(client, message, 'gato.jpg')
       }
 
     } catch (error) {
