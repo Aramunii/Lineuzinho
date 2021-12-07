@@ -55,11 +55,13 @@ async function start(client) {
         await Util.data.getMovie(client, message);
       } else if (body.includes('#decida')) {
         await Entertainment.data.getDecision(client, message);
-      }  else if (body.includes('#megasena')) {
+      } else if (body.includes('#megasena')) {
         await Entertainment.data.loteryMake(client, message)
       } else if (body.includes('#jogodobicho')) {
         await Entertainment.data.animalGame(client, message)
-      } else if (body.includes('#meustand')) {
+      }
+
+      else if (body.includes('#meustand')) {
         await Jojo.data.getMyStand(client, message, user)
       } else if (body.includes('#definirstand')) {
         await Jojo.data.setMyStand(client, message, user)
@@ -69,20 +71,20 @@ async function start(client) {
         await Jojo.data.showStand(client, message, user)
       } else if (body.includes('#statusstand')) {
         await Jojo.data.setRandomStats(client, message, user)
-      } else if (body.includes('#criarinimigo')) {
+      }  /*else if (body.includes('#criarinimigo')) {
         await Jojo.data.createEnemy(client, message, user)
       } else if (body.includes('#inimigo')) {
         await Jojo.data.getEnemy(client, message, user);
       } else if (body.includes('#atacar')) {
         await Jojo.data.attackEnemy(client, message, user)
-      } else if (body.includes('#desciclopedia2')) {
+      }*/ else if (body.includes('#desciclopedia2')) {
         await Entertainment.data.desciclopedia(client, message);
       } else if (body.includes('#gato')) {
         await Entertainment.data.getCat(client, message);
       } else if (body.includes('#inutil')) {
         await Entertainment.data.getRandomFact(client, message);
       } else if (body.includes('#espaço')) {
-        await Util.data.data.getPeopleInSpace(client, message);
+        await Util.data.getPeopleInSpace(client, message);
       } else if (body.includes('belina')) {
         Sender.sendImageName(client, message, 'belinao.jpg')
       } else if (message.mentionedJidList.length > 0) {
@@ -183,23 +185,27 @@ async function quintaSerie(client, message) {
   ]
 
   if (groups.includes(message.from)) {
-    var body = message.body.toLowerCase();
-    var last2 = body.slice(-2);
-    var last3 = body.slice(-3);
-    if (['bom dia', 'bomdia'].includes(body)) {
-      Sender.sendMessageNormal(client, message, `*Mermão bom dia é o caralho 😡😡😡 parceiro*\n*Isso aqui é o grupo da torcida jovem 🧑🏿🧑🏿, entendeu ?🤔*\n*Tu quer dar bom dia cria um grupo pra tua família👨‍👩‍👧‍👦👨‍👩‍👦‍👦👨‍👩‍👧👨‍👩‍👧‍👧 ai tu fica dando bom dia😡*`, '');
+    if (message.body) {
+      var body = message.body.toLowerCase();
+      var last2 = body.slice(-2);
+      var last3 = body.slice(-3);
+      var last4 = body.slice(-4);
+      if (['bom dia', 'bomdia'].includes(body)) {
+        Sender.sendMessageNormal(client, message, `*Mermão bom dia é o caralho 😡😡😡 parceiro*\n*Isso aqui é o grupo da torcida jovem 🧑🏿🧑🏿, entendeu ?🤔*\n*Tu quer dar bom dia cria um grupo pra tua família👨‍👩‍👧‍👦👨‍👩‍👦‍👦👨‍👩‍👧👨‍👩‍👧‍👧 ai tu fica dando bom dia😡* *Aqui é psicopata👹👹👹, ladrão🔫bandido💵💸💴🤡🤡🗡cheirador🤧🤧👃🏻👃🏻, vendedor de droga🚬💊, polícia maluco👨🏻‍✈👨🏻‍✈🚓  polícia assaltante👨🏻‍✈🔫🗡💸💸, aqui tem a porra🤡 toda mermão, isso aqui é a torcidav🧑🏿🧑🏿jovem🔴⚫do FLAMENGO🔴⚫, bom dia é o caralho rapá🖕🏻, vtnc 😡*`, '');
+      }
+
+      if (['ão', 'ao'].includes(last2)) {
+        Sender.sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
+      } else if (['sto', 'udo', 'uto', 'uco'].includes(last3)) {
+        Sender.sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
+      } else if (['sta', 'ssa?', 'ssa', 'ssa!'].includes(last3)) {
+        Sender.sendMessageNormal(client, message, '*Meu pau te atravessa!*', '');
+      } else if (['vido',].includes(last4)) {
+        Sender.sendMessageNormal(client, message, '*Meu pau no teu ouvido!*', '');
+      } else if (['ota', 'ota!'].includes(last3)) {
+        Sender.sendMessageNormal(client, message, '*Meu pau te sufoca!*', '');
+      }
     }
 
-    if (['ão', 'ao'].includes(last2)) {
-      Sender.sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
-    } else if (['sto', 'udo', 'uto', 'uco'].includes(last3)) {
-      Sender.sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
-    } else if (['sta', 'ssa?', 'ssa', 'ssa!'].includes(last3)) {
-      Sender.sendMessageNormal(client, message, '*Meu pau te atravessa!*', '');
-    } else if (['ido',].includes(last3)) {
-      Sender.sendMessageNormal(client, message, '*Meu pau no teu ouvido!*', '');
-    } else if (['ota', 'ota!'].includes(last3)) {
-      Sender.sendMessageNormal(client, message, '*Meu pau te sufoca!*', '');
-    }
   }
 }

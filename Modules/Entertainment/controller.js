@@ -2,6 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const Sender = require('../sender.js')
 const translate = require('translate');
+const Path = require('path')
+const fs = require('fs');
 
 var methods = {
 

@@ -4,7 +4,8 @@ const Sender = require('../sender.js')
 const movieRandom = require('./movie.js');
 const gameSearch = require('./game.js');
 const Steam = require('./steam.js');
-
+const Path = require('path')
+const fs = require('fs');
 var methods = {};
 
 methods.getSteam = async function getSteam(client, message) {
