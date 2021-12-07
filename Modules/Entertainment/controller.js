@@ -72,7 +72,7 @@ methods.getCat = async function getCat(client,message) {
 
 async function downloadImage() {
     const url = 'https://cataas.com/cat/cute'
-    const path = 'modules/images/' + 'gato.jpg'
+    const path = 'Modules/images/' + 'gato.jpg'
     const writer = fs.createWriteStream(path)
 
     const response = await axios({

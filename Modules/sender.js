@@ -106,7 +106,7 @@ module.exports = {
     await client
       .sendImage(
         message.from,
-        'modules/images/' + image,
+        'Modules/images/' + image,
         'img.jpg',
         '\n\n 🥸 ```Lineuzinho```',
         message.id.toString()
@@ -140,7 +140,7 @@ module.exports = {
 
   async sendSticker(client, message, text) {
     await client
-      .sendImageAsSticker(message.from, "https://blog.idrsolutions.com/wp-content/uploads/2017/03/WebP.png")
+      .sendImageAsSticker(message.from, "")
       .then((result) => {
         console.log('Result: ', result); //return object success
       })
