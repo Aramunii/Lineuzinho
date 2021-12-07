@@ -137,7 +137,6 @@ async function createMenuEntertain(client, message) {
 - *#jogodobicho* - Retorna os números para jogar na mega!. 
 - *#gato* - Envia uma foto de um gato!.
 - *#inutil* - Envia um Fato inutil da vida.
-- *#desciclopedia* - Envia um artigo da desciclopedia.
 
   `
   Sender.sendMessage(client, message, textMenu, '🎲 Diversão 🎲')
