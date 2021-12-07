@@ -120,6 +120,8 @@ async function start(client) {
         await Util.data.JustWatch(client, message, 'hbo')
       } else if (body.includes('#paramount')) {
         await Util.data.JustWatch(client, message, 'paramount')
+      } else if (body.includes('#hojenahistoria')) {
+        await Util.data.TodayHistory(client, message);
       }
 
 

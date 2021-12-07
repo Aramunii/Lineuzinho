@@ -84,6 +84,32 @@ methods.JustWatch = async function justWatch(client, message, type) {
     Sender.sendMessage(client, message, data, ` *${type.toUpperCase()}* `)
 }
 
+methods.TodayHistory = async function TodayHistory(client, message) {
+    var response = await axios.get('https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal');
+    var $ = cheerio.load(response.data);
+    var maincontent = $('.main-page-block-contents').toArray()[2]
+    var link_today = $(maincontent).find('.mw-redirect').attr('href')
+    response = await axios.get('https://pt.wikipedia.org' + link_today);
+    $ = cheerio.load(response.data);
+    var historical = $('#Eventos_hist\\.C3\\.B3ricos').closest('h2').next().next().next().toArray();
+    historical = $(historical).find('li').toArray();
+    historical2 = historical.map(element => {
+        var boldText = $(element).find('a').toArray().map(element => {
+            return $(element).text()
+        })
+
+        var text = $(element).text();
+
+        boldText.forEach(element => {
+            text = text.replace(element, `*${element}*`)
+        })
+        return '▪️' + text;
+    })
+
+    Sender.sendMessage(client, message, historical2.join('\n\n'), '🔍 *HOJE NA HISTÓRIA* 📚 ')
+
+}
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
