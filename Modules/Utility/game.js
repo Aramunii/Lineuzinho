@@ -38,7 +38,7 @@ methods.getGame = async function getGame(query) {
 async function downloadImage(img_link, query) {
     const url = encodeURI(img_link)
     try {
-        const path = Path.resolve(__dirname, 'images', query.replace(/[^\w\s]/gi, '') + '.jpg')
+        const path = 'modules/images/' + query.replace(/[^\w\s]/gi, '') + '.jpg'
         const writer = fs.createWriteStream(path)
 
         const response = await axios({

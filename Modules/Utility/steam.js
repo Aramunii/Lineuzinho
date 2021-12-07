@@ -41,37 +41,6 @@ ${discount}
 
 }
 
-function sleep(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-}
-
-async function downloadImage(img_link, query) {
-    const url = encodeURI(img_link)
-    try {
-        const path = Path.resolve(__dirname, 'images', query.replace(/[^\w\s]/gi, '') + '.jpg')
-        const writer = fs.createWriteStream(path)
-
-        const response = await axios({
-            url,
-            method: 'GET',
-            responseType: 'stream'
-        })
-        console.log(writer);
-
-        response.data.pipe(writer)
-
-        return new Promise((resolve, reject) => {
-            writer.on('finish', resolve)
-            writer.on('error', reject)
-        })
-
-    } catch (error) {
-        console.log(error);
-    }
-
-}
 
 
 exports.data = methods;
