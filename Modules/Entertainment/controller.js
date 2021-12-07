@@ -64,7 +64,7 @@ methods.getRandomFact = async function getRandomFact(client, message) {
     Sender.sendMessage(client, message, text, '📚 UM FATO INÚTIL 📚')
 }
 
-methods.getCat = async function getCat() {
+methods.getCat = async function getCat(client,message) {
     await downloadImage();
     Sender.sendImageName(client, message, 'gato.jpg')
 }
@@ -72,7 +72,7 @@ methods.getCat = async function getCat() {
 
 async function downloadImage() {
     const url = 'https://cataas.com/cat/cute'
-    const path = Path.resolve(__dirname, 'images', 'gato.jpg')
+    const path = 'modules/images/' + 'gato.jpg'
     const writer = fs.createWriteStream(path)
 
     const response = await axios({

@@ -1,13 +1,13 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
 const axios = require('axios');
-const ApiRequest = require('./api.js');
 const cheerio = require('cheerio');
 const Path = require('path')
+const ApiRequest = require('./api.js');
 const Sender = require('./Modules/sender.js')
-
 const Jojo = require('./Modules/Jojo/controller.js')
 const Entertainment = require('./Modules/Entertainment/controller.js')
 const Util = require('./Modules/Utility/controller.js')
+//const wa = require('@open-wa/wa-automate');
 
 var user = [];
 
@@ -20,7 +20,21 @@ wppconnect
   })
   .then((client) => start(client))
   .catch((error) => console.log(error));
-
+/*
+wa.create({
+  sessionId: "Lineuzinho",
+  multiDevice: false, //required to enable multiDevice support
+  authTimeout: 60, //wait only 60 seconds to get a connection with the host account device
+  blockCrashLogs: true,
+  disableSpins: true,
+  headless: true,
+  hostNotificationLang: 'PT_BR',
+  logConsole: true,
+  popup: true,
+  useChrome: true,
+  qrTimeout: 0, //0 means it will wait forever for you to scan the qr code
+}).then(client => start(client));
+*/
 async function start(client) {
   client.onMessage(async (message) => {
     try {
@@ -30,6 +44,10 @@ async function start(client) {
       var body = '';
       if (typeof message.body != 'undefined') {
         body = message.body.toLowerCase();
+      }
+
+      if (body.includes('#teste')) {
+        Sender.sendSticker(client, message, '');
       }
 
       if (body.includes('#menu')) {
@@ -60,7 +78,6 @@ async function start(client) {
       } else if (body.includes('#jogodobicho')) {
         await Entertainment.data.animalGame(client, message)
       }
-
       else if (body.includes('#meustand')) {
         await Jojo.data.getMyStand(client, message, user)
       } else if (body.includes('#definirstand')) {
@@ -91,7 +108,20 @@ async function start(client) {
         if (message.mentionedJidList[0].replace('@c.us', '') == '553187208431') {
           Sender.sendImageName(client, message, 'belinao.jpg')
         }
+      } else if (body.includes('#netflix')) {
+        await Util.data.JustWatch(client, message, 'netflix')
+      } else if (body.includes('#primevideo')) {
+        await Util.data.JustWatch(client, message, 'primevideo')
+      } else if (body.includes('#disney')) {
+        await Util.data.JustWatch(client, message, 'disney')
+      } else if (body.includes('#starplus')) {
+        await Util.data.JustWatch(client, message, 'starplus')
+      } else if (body.includes('#hbo')) {
+        await Util.data.JustWatch(client, message, 'hbo')
+      } else if (body.includes('#paramount')) {
+        await Util.data.JustWatch(client, message, 'paramount')
       }
+
 
       await quintaSerie(client, message);
 
@@ -149,6 +179,12 @@ function createMenuUtil(client, message) {
 
 - *#assistir* - retorna um filme ou série aleatória;
 - *#espaço* - Retorna quantas pessoas está no espaço.
+- *#netflix*  - Retorna novidades da Netflix
+- *#primevideo* - Retorna novidades da Prime video 
+- *#disney* - Retorna novidades da Disney Plus
+- *#hbo* - Retorna novidades da Hbo Max
+- *#paramount* - Retorna novidades da Paramount
+- *#starplus* - Retorna novidades da Star Plus
 
   `
   Sender.sendMessage(client, message, textMenu, '🔨 UTILIDADES 🔨')

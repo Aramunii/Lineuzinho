@@ -1,27 +1,14 @@
-//var another = require('./movie.js');
-var another = require('./steam.js');
 const fs = require('fs');
 const axios = require('axios');
 const Path = require('path')
 const cheerio = require('cheerio');
 const translate = require('translate');
-const skybiometry = require('skybiometry');
+const { Socket } = require('socket.io-client');
 
 async function teste() {
-    var response = await axios.get('https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json');
-    var json = response.data;
-    var text = `Atualmente ${json.number} pessoas estão no espaço!\n\n`;
+   
 
-    var peoples = json.people.map(people => {
-        return `*${people.name}*\n*País:* ${capitalizeFirstLetter(people.country)}\n*Cargo:*${people.title}\n*Dias no espaço:* ${diffDays(people.launchdate)}`;
-    })
-
-
-    text += peoples.join('\n');
-
-
-    console.log(text);
-
+    console.log(items)
 }
 
 teste();

@@ -6,6 +6,9 @@ const gameSearch = require('./game.js');
 const Steam = require('./steam.js');
 const Path = require('path')
 const fs = require('fs');
+const JustWatch = require('./justwatch.js');
+const { cli } = require('winston/lib/winston/config');
+
 var methods = {};
 
 methods.getSteam = async function getSteam(client, message) {
@@ -59,6 +62,26 @@ methods.getPeopleInSpace = async function getPeopleInSpace(client, message) {
 
     Sender.sendMessage(client, message, text, '👩🏻‍🚀 PESSOAS NO ESPAÇO 🚀')
 
+}
+
+methods.JustWatch = async function justWatch(client, message, type) {
+    var data = '*Filmes recém adicionados ao catalógo*\n\n';
+
+    if (type == 'netflix') {
+        data += await JustWatch.data.getNew('nfx');
+    } else if (type == 'primevideo') {
+        data += await JustWatch.data.getNew('prv');
+    } else if (type == 'disney') {
+        data += await JustWatch.data.getNew('dnp');
+    } else if (type == 'starplus') {
+        data += await JustWatch.data.getNew('srp');
+    } else if (type == 'hbo') {
+        data += await JustWatch.data.getNew('hbm');
+    } else if (type == 'paramount') {
+        data += await JustWatch.data.getNew('pmp');
+    }
+
+    Sender.sendMessage(client, message, data, ` *${type.toUpperCase()}* `)
 }
 
 
