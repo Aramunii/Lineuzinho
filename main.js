@@ -13,9 +13,9 @@ var user = [];
 
 wppconnect
   .create({
-    session: 'ZapWatch2',
+    session: 'ZapWatch22',
     puppeteerOptions: {
-      userDataDir: './tokens/ZapWatch2', // or your custom directory
+      userDataDir: './tokens/ZapWatch22', // or your custom directory
     },
   })
   .then((client) => start(client))
@@ -53,13 +53,9 @@ async function start(client) {
         await getMyProfile(client, message)
       } else if (body === '#assistir') {
         await Util.data.getMovie(client, message);
-      } else if (body.includes('#game')) {
-        await Util.data.getGame(client, message);
       } else if (body.includes('#decida')) {
         await Entertainment.data.getDecision(client, message);
-      } else if (body.includes('#steam')) {
-        await Util.data.getSteam(client, message)
-      } else if (body.includes('#megasena')) {
+      }  else if (body.includes('#megasena')) {
         await Entertainment.data.loteryMake(client, message)
       } else if (body.includes('#jogodobicho')) {
         await Entertainment.data.animalGame(client, message)
@@ -79,7 +75,7 @@ async function start(client) {
         await Jojo.data.getEnemy(client, message, user);
       } else if (body.includes('#atacar')) {
         await Jojo.data.attackEnemy(client, message, user)
-      } else if (body.includes('#desciclopedia')) {
+      } else if (body.includes('#desciclopedia2')) {
         await Entertainment.data.desciclopedia(client, message);
       } else if (body.includes('#gato')) {
         await Entertainment.data.getCat(client, message);
@@ -151,8 +147,6 @@ function createMenuUtil(client, message) {
   var textMenu = `Olá *${message.sender.pushname}*\n
 
 - *#assistir* - retorna um filme ou série aleatória;
-- *#game* nomejogo - Retorna um jogo e seu link para download
-- *#steam* nomejogo - Retorna uma lista de jogos na steam 
 - *#espaço* - Retorna quantas pessoas está no espaço.
 
   `
