@@ -187,7 +187,7 @@ function createMenuUtil(client, message) {
 - *#hbo* - Retorna novidades da Hbo Max
 - *#paramount* - Retorna novidades da Paramount
 - *#starplus* - Retorna novidades da Star Plus
-
+- *#hojenahistoria* - Retorna acontecimentos históricos no dia de hoje
   `
   Sender.sendMessage(client, message, textMenu, '🔨 UTILIDADES 🔨')
 }
@@ -236,12 +236,14 @@ async function quintaSerie(client, message) {
         Sender.sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
       } else if (['sto', 'udo', 'uto', 'uco'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
-      } else if (['sta', 'ssa?', 'ssa', 'ssa!'].includes(last3)) {
+      } else if (['ssa?', 'ssa', 'ssa!'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Meu pau te atravessa!*', '');
       } else if (['vido',].includes(last4)) {
         Sender.sendMessageNormal(client, message, '*Meu pau no teu ouvido!*', '');
       } else if (['ota', 'ota!'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Meu pau te sufoca!*', '');
+      }else if (['undo', 'undo!'].includes(last4)) {
+        Sender.sendMessageNormal(client, message, '*Meu pau no seu fundo!*', '');
       }
     }
 
