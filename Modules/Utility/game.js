@@ -12,8 +12,9 @@ methods.getGame = async function getGame(query) {
 
     const $ = cheerio.load(response.data);
 
+    var currNum = Math.round(($('.post').toArray().length - 1) * Math.random());
 
-    var links = $('.post').toArray()[0];
+    var links = $('.post').toArray()[currNum];
     console.log(links);
     var link = $(links).find('.entry-title').find('a').attr('href');
     var title = $(links).find('.entry-title').text();

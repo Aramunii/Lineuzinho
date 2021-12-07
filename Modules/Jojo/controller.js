@@ -224,7 +224,7 @@ methods.createEnemy = async function createEnemy(client, message, user) {
         } catch (err) {
             console.log(err);
         }
-        textMenu += '\n\n O Inimigo é: ' + stand
+        textMenu += '\n\n O Inimigo é: *' + stand + '*'
     } else {
         textMenu += '\n\n Você digitou algo errado!'
     }
