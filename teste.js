@@ -10,11 +10,13 @@ async function teste() {
     var response = await axios.get('https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal');
     var $ = cheerio.load(response.data);
     var maincontent = $('.main-page-block-contents').toArray()[2]
-    var link_today = $(maincontent).find('.mw-redirect').attr('href')
+    var link_today = $(maincontent).find('.hlist').find('a')[0]
+    link_today = $(link_today).attr('href');
     response = await axios.get('https://pt.wikipedia.org' + link_today);
     $ = cheerio.load(response.data);
     var historical = $('#Eventos_hist\\.C3\\.B3ricos').closest('h2').next().next().next().toArray();
     historical = $(historical).find('li').toArray();
+    console.log(historical);
     historical2 = historical.map(element => {
         var boldText = $(element).find('a').toArray().map(element => {
             return $(element).text()
@@ -25,6 +27,8 @@ async function teste() {
         boldText.forEach(element => {
             text = text.replace(element, `*${element}*`)
         })
+
+        console.log(text);
         return text;
     })
 }
