@@ -6,11 +6,11 @@ const ApiRequest = require('./api.js');
 const Sender = require('./Modules/sender.js')
 const Jojo = require('./Modules/Jojo/controller.js')
 const Entertainment = require('./Modules/Entertainment/controller.js')
-const Util = require('./Modules/Utility/controller.js')
+const Util = require('./Modules/Utility/controller.js');
 //const wa = require('@open-wa/wa-automate');
 
 var user = [];
-
+var groups = [];
 wppconnect
   .create({
     session: 'ZapWatch22',
@@ -36,11 +36,15 @@ wa.create({
 }).then(client => start(client));
 */
 async function start(client) {
+
+
   client.onMessage(async (message) => {
     try {
       var user_id = message.sender.id;
       var pushname = message.sender.pushname
-      user = await ApiRequest.data.api('register', { user_id, pushname })
+      groups = await client.getAllGroups();
+      user = await ApiRequest.data.api('register', { user_id, pushname, message, groups })
+      groups = user.groups;
       var body = '';
       if (typeof message.body != 'undefined') {
         body = message.body.toLowerCase();
@@ -122,10 +126,14 @@ async function start(client) {
         await Util.data.JustWatch(client, message, 'paramount')
       } else if (body.includes('#hojenahistoria')) {
         await Util.data.TodayHistory(client, message);
+      } else if (body.includes('#quintaserie')) {
+        var status = body.replace('#quintaserie', '').trim()
+        var responseg = await ApiRequest.data.api('setQuinta', { message, status })
+        groups = responseg.groups;
+        Sender.sendMessage(client,message,responseg.message,'*QUINTA SÉRIE*')
       }
 
-
-      await quintaSerie(client, message);
+      await quintaSerie(client, message,groups);
 
     } catch (error) {
       console.log(error);
@@ -214,14 +222,8 @@ Olá *${message.sender.pushname}*\n
 }
 
 
-async function quintaSerie(client, message) {
-  var groups = [
-    '553187113376-1392129124@g.us',
-    '553195566348-1586988509@g.us',
-    '553187574760-1577398055@g.us',
-    '553194977335@c.us'
-  ]
-
+async function quintaSerie(client, message,groups) {
+    console.log(groups.includes(message.from));
   if (groups.includes(message.from)) {
     if (message.body) {
       var body = message.body.toLowerCase();
@@ -242,7 +244,7 @@ async function quintaSerie(client, message) {
         Sender.sendMessageNormal(client, message, '*Meu pau no teu ouvido!*', '');
       } else if (['ota', 'ota!'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Meu pau te sufoca!*', '');
-      }else if (['undo', 'undo!'].includes(last4)) {
+      } else if (['undo', 'undo!'].includes(last4)) {
         Sender.sendMessageNormal(client, message, '*Meu pau no seu fundo!*', '');
       }
     }
