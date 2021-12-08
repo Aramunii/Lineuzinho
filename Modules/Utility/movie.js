@@ -28,7 +28,7 @@ function convertDate(date) {
 
 async function downloadImage(poster_path) {
     const url = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2' + poster_path
-    const path = 'modules/images/' + poster_path.replace('/', '') + '.jpg'
+    const path = 'Modules/images/' + poster_path.replace('/', '') + '.jpg'
     const writer = fs.createWriteStream(path)
 
     const response = await axios({

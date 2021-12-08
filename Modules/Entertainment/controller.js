@@ -121,6 +121,7 @@ methods.desmotive = async function desmotive(client, message) {
         "“Trabalhe duro, reclame ainda mais. “",
         "“Eu não quero fazer coisas. As coisas são uma merda.”",
         "“Nunca é tarde para voltar para a cama.”",
+       "“Não se preocupe, nada nunca estará tão ruim que não possa piorar”",
     ]
 
     var currNum = Math.round((desmotiv.length - 1) * Math.random());

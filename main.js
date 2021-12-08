@@ -238,7 +238,10 @@ async function quintaSerie(client, message, groups) {
       }
 
       if (['ão', 'ao'].includes(last2)) {
-        Sender.sendMessageNormal(client, message, '*Meu pau no seu butão!*', '');
+          var frases = ['Meu pau na tua mão','Meu pau no seu butão!']
+
+
+        Sender.sendMessageNormal(client, message, `*${frases[Math.round((frases.length - 1) * Math.random())]}*`, '');
       } else if (['sto', 'udo', 'uto', 'uco'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
       } else if (['ssa?', 'ssa', 'ssa!'].includes(last3)) {
