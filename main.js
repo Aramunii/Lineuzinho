@@ -74,8 +74,19 @@ async function start(client) {
         await createMenuJojo(client, message);
       } else if (body.includes('#meuperfil')) {
         await getMyProfile(client, message)
-      } else if (body === '#assistir') {
-        await Util.data.getMovie(client, message);
+      } else if (body.includes('#assistir')) {
+        var ver = body.replace('#assistir', '').trim();
+        console.log(ver);
+        if (ver == '') {
+          await Util.data.getMovie(client, message);
+        } else {
+          if(ver.length < 2)
+          {
+              Sender.sendMessage(client,message,'Digite o nome do filme completo por favor!','*ERRO*')
+          }else{
+            await Util.data.getMovieSearch(client, message,ver);
+          }
+        }
       } else if (body.includes('#decida')) {
         await Entertainment.data.getDecision(client, message);
       } else if (body.includes('#megasena')) {
@@ -192,6 +203,7 @@ function createMenuUtil(client, message) {
   var textMenu = `Olá *${message.sender.pushname}*\n
 
 - *#assistir* - retorna um filme ou série aleatória;
+- *#assistir* nome filme - retorna informações sobre o filme;
 - *#espaço* - Retorna quantas pessoas está no espaço.
 - *#netflix*  - Retorna novidades da Netflix
 - *#primevideo* - Retorna novidades da Prime video 
@@ -238,9 +250,7 @@ async function quintaSerie(client, message, groups) {
       }
 
       if (['ão', 'ao'].includes(last2)) {
-          var frases = ['Meu pau na tua mão','Meu pau no seu butão!']
-
-
+        var frases = ['Meu pau na tua mão', 'Meu pau no seu butão!']
         Sender.sendMessageNormal(client, message, `*${frases[Math.round((frases.length - 1) * Math.random())]}*`, '');
       } else if (['sto', 'udo', 'uto', 'uco'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');

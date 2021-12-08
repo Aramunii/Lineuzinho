@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const Path = require('path')
+const ApiRequest = require('../../api.js');
 
 var methods = {};
 
@@ -12,11 +13,22 @@ methods.getMovie = async function getMovieRandom() {
     var img = await downloadImage(response.poster_path);
 
     var movie = {
-        text: `*Filme:* ${response.title} \n*Data de lançamento:* ${release_date} \n*Genêro:* ${response.genres}\n*Disponivel em:* ${response.providers}`,
+        text: `*Filme:* ${response.title} \n*Data de lançamento:* ${release_date} \n*Genêro:* ${response.genres}\n*Disponivel em:* ${response.providers}\n\n*Sinopse:* ${response.overview}`,
         poster_path: response.poster_path.replace('/', '')
     }
 
 
+    return movie;
+}
+
+methods.getMovieSearch = async function getMovieSearch(search) {
+    var response = await ApiRequest.data.api('getSearch', { search })
+    var release_date = convertDate(response.release_date);
+    var img = await downloadImage(response.poster_path);
+    var movie = {
+        text: `*Filme:* ${response.title} \n*Data de lançamento:* ${release_date} \n*Genêro:* ${response.genres}\n*Disponivel em:* ${response.providers}\n\n*Sinopse:* ${response.overview}`,
+        poster_path: response.poster_path.replace('/', '')
+    }
     return movie;
 }
 

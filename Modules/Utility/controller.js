@@ -33,6 +33,12 @@ methods.getMovie = async function getMovie(client, message) {
     Sender.sendImage(client, message, movie, '🎬 Filmes e séries 🎬');
 }
 
+methods.getMovieSearch = async function getMovieSearch(client, message,search) {
+    Sender.sendMessage(client, message, 'Aguarde... estou procurando para você', '🎬 Filmes e séries 🎬');
+    var movie = await movieRandom.data.getMovieSearch(search);
+    Sender.sendImage(client, message, movie, '🎬 Filmes e séries 🎬');
+}
+
 methods.getGame = async function getGame(client, message) {
     Sender.sendMessage(client, message, 'Aguarde... estou procurando o jogo para você', '🏴‍☠️ BAÍA DOS PIRATAS 🦜');
     var gameName = message.body.replace('#jogo', '');
@@ -65,7 +71,7 @@ methods.getPeopleInSpace = async function getPeopleInSpace(client, message) {
 }
 
 methods.JustWatch = async function justWatch(client, message, type) {
-    var data = '*Filmes recém adicionados ao catalógo*\n\n';
+    var data = '*Recém adicionados ao catalógo*\n\n';
 
     if (type == 'netflix') {
         data += await JustWatch.data.getNew('nfx');
