@@ -8,6 +8,7 @@ const Jojo = require('./Modules/Jojo/controller.js')
 const Entertainment = require('./Modules/Entertainment/controller.js')
 const Util = require('./Modules/Utility/controller.js');
 const { cli } = require('winston/lib/winston/config');
+const { response } = require('express');
 //const wa = require('@open-wa/wa-automate');
 
 var user = [];
@@ -80,11 +81,10 @@ async function start(client) {
         if (ver == '') {
           await Util.data.getMovie(client, message);
         } else {
-          if(ver.length < 2)
-          {
-              Sender.sendMessage(client,message,'Digite o nome do filme completo por favor!','*ERRO*')
-          }else{
-            await Util.data.getMovieSearch(client, message,ver);
+          if (ver.length < 2) {
+            Sender.sendMessage(client, message, 'Digite o nome do filme completo por favor!', '*ERRO*')
+          } else {
+            await Util.data.getMovieSearch(client, message, ver);
           }
         }
       } else if (body.includes('#decida')) {
@@ -145,6 +145,11 @@ async function start(client) {
         Sender.sendMessage(client, message, responseg.message, '*QUINTA SÉRIE*')
       } else if (body.includes('#desmotiva')) {
         await Entertainment.data.desmotive(client, message);
+      } else if (body.includes('#battleroyale')) {
+        await battleRoyale(client,message);
+      }else if(body.includes('#matarbr'))
+      {
+          await killBattle(client,message);
       }
 
       await quintaSerie(client, message, groups);
@@ -154,6 +159,21 @@ async function start(client) {
     }
     //  console.log(await client.getAllGroups());
   });
+}
+
+async function battleRoyale(client,message)
+{
+  var user_id = message.sender.id;
+  var group_id = message.from;
+  var responsebr = await ApiRequest.data.api('registerBattle', { user_id,group_id})
+  console.log(responsebr);
+  Sender.sendMessage(client,message,`Stands na rodada:${responsebr.players}\n\n ` + responsebr.message,`Battle Royale Round *${responsebr.round.id}*`)
+}
+
+async function killBattle(client,message)
+{
+  var responsebr = await ApiRequest.data.api('killPlayer')
+  Sender.sendMessage(client,message,responsebr.message,`Battle Royale Round *${responsebr.round.id}*`)
 }
 
 
