@@ -7,6 +7,7 @@ const Sender = require('./Modules/sender.js')
 const Jojo = require('./Modules/Jojo/controller.js')
 const Entertainment = require('./Modules/Entertainment/controller.js')
 const Util = require('./Modules/Utility/controller.js');
+const { cli } = require('winston/lib/winston/config');
 //const wa = require('@open-wa/wa-automate');
 
 var user = [];
@@ -130,10 +131,12 @@ async function start(client) {
         var status = body.replace('#quintaserie', '').trim()
         var responseg = await ApiRequest.data.api('setQuinta', { message, status })
         groups = responseg.groups;
-        Sender.sendMessage(client,message,responseg.message,'*QUINTA SÉRIE*')
+        Sender.sendMessage(client, message, responseg.message, '*QUINTA SÉRIE*')
+      } else if (body.includes('#desmotiva')) {
+        await Entertainment.data.desmotive(client, message);
       }
 
-      await quintaSerie(client, message,groups);
+      await quintaSerie(client, message, groups);
 
     } catch (error) {
       console.log(error);
@@ -179,6 +182,7 @@ async function createMenuEntertain(client, message) {
 - *#jogodobicho* - Retorna os números para jogar na mega!. 
 - *#gato* - Envia uma foto de um gato!.
 - *#inutil* - Envia um Fato inutil da vida.
+- *#desmotiva* - Coach reverso!
 
   `
   Sender.sendMessage(client, message, textMenu, '🎲 Diversão 🎲')
@@ -222,8 +226,7 @@ Olá *${message.sender.pushname}*\n
 }
 
 
-async function quintaSerie(client, message,groups) {
-    console.log(groups.includes(message.from));
+async function quintaSerie(client, message, groups) {
   if (groups.includes(message.from)) {
     if (message.body) {
       var body = message.body.toLowerCase();
@@ -246,8 +249,12 @@ async function quintaSerie(client, message,groups) {
         Sender.sendMessageNormal(client, message, '*Meu pau te sufoca!*', '');
       } else if (['undo', 'undo!'].includes(last4)) {
         Sender.sendMessageNormal(client, message, '*Meu pau no seu fundo!*', '');
+      } else if (['ente', 'ente!'].includes(last4)) {
+        Sender.sendMessageNormal(client, message, '*Meu pau no seu dente!*', '');
       }
     }
 
   }
 }
+
+

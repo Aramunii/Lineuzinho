@@ -64,11 +64,69 @@ methods.getRandomFact = async function getRandomFact(client, message) {
     Sender.sendMessage(client, message, text, '📚 UM FATO INÚTIL 📚')
 }
 
-methods.getCat = async function getCat(client,message) {
+methods.getCat = async function getCat(client, message) {
     await downloadImage();
     Sender.sendImageName(client, message, 'gato.jpg')
 }
 
+methods.desmotive = async function desmotive(client, message) {
+    var desmotiv = [
+        "“Hoje é o primeiro dia do resto da sua vida. Mas ontem também foi, e veja como acabou.”",
+        "“A vida é o que acontece quando você está ocupado lendo frases motivacionais.”",
+        "“Levante a mão se você já recebeu conselhos não solicitados suficientes sobre o que deve ser feito com os limões que a vida pode ou não lhe dar.”",
+        "“É tudo uma ladeira abaixo a partir daqui.”",
+        "“Não descanse antes de reclamar de tudo.”",
+        "“Pode ser que o seu propósito na vida seja servir de aviso para os outros.”",
+        "“As piores coisas da sua vida provavelmente ainda não aconteceram com você.”",
+        "“A vida é uma série de coisas que preferiríamos não fazer.”",
+        "“Algumas pessoas nascem perdedoras, outras precisam aprender da maneira mais difícil.”",
+        "“Desistentes nunca vencem e os vencedores nunca param de falar sobre como venceram.”",
+        "“Nunca é tarde para falhar.”",
+        "“Tente bastante e não se preocupe se falhar, porque todos esperavam isso.”",
+        "“A estrada para o sucesso está sempre em construção.”",
+        "“Não há limite para o que você pode ser se mentir para si mesmo.”",
+        "“Será fácil? Não. Vale a pena? Absolutamente não!”",
+        "“Você tentou o seu melhor e falhou miseravelmente. A lição é: nunca tente.”",
+        "“Quando as coisas ficam difíceis, as difíceis ficam ainda mais difíceis.”",
+        "“A vida é difícil, mas é ainda mais difícil se você for idiota.”",
+        "“O elevador para o sucesso está quebrado. Você terá que usar as escadas, um degrau de cada vez.”",
+        "“O primeiro passo para o fracasso é tentar.”",
+        "“Nem tudo é uma lição. Às vezes, você simplesmente falha. “",
+        "“Aqueles que duvidam de sua capacidade provavelmente têm um motivo válido.”",
+        "“Cada dia é uma nova chance para você errar novamente.”",
+        "“A única coisa que todas as suas falhas têm em comum é você.”",
+        "“Sempre há espaço na vida para fazer mais merda. Sempre.”",
+        "“Sua vida só sobe para que você possa cair de uma nova altura.”",
+        "“Estou corajosamente indo a lugar nenhum.”",
+        "“Quem disse que dinheiro não compra felicidade não sabia onde comprar.”",
+        "“Todo mundo tem um propósito na vida. Talvez o meu esteja assistindo televisão.”",
+        "“É melhor a vida ser um destino porque esta jornada é uma merda.”",
+        "“Sou naturalmente engraçado porque minha vida é uma piada.”",
+        "“O sentido da vida é encontrar o seu dom. Boa sorte com isso.”",
+        "“Hoje será um dia como qualquer outro dia.”",
+        "“Vida é dor. Qualquer pessoa que diga o contrário está vendendo alguma coisa.”",
+        "“Quando a vida te derrubar, fique aí e tire uma soneca.”",
+        "“Se você nunca tentar nada novo, perderá muitas das grandes decepções da vida.”",
+        "“Você só morre uma vez.”",
+        "“A vida é 10% do que acontece com você, os outros 90% acontece quando você tem dinheiro.”",
+        "“Sempre peça dinheiro emprestado a um pessimista. Ele não vai esperar pelo dinheiro de volta.”",
+        "“Por que resta tanto mês no fim do dinheiro?”",
+        "“As melhores coisas da vida são as mais caras.”",
+        "“Todos os dias é sexta-feira quando você está desempregado.”",
+        "“Sempre chego tarde ao escritório, mas compenso saindo mais cedo.”",
+        "“É verdade que o trabalho árduo nunca matou ninguém, mas eu prefiro não me arriscar.”",
+        "Se você odeia seu trabalho, existe um grupo de apoio para isso chamado Todomundo, e eles se encontram me um bar.”",
+        "“A recompensa pelo bom trabalho é mais trabalho.”",
+        "“Sempre haverá alguém no Youtube que sabe fazer melhor do que você.”",
+        "“Trabalhe duro, reclame ainda mais. “",
+        "“Eu não quero fazer coisas. As coisas são uma merda.”",
+        "“Nunca é tarde para voltar para a cama.”",
+    ]
+
+    var currNum = Math.round((desmotiv.length - 1) * Math.random());
+    var text = `*${desmotiv[currNum]}*`
+    Sender.sendMessage(client, message, text, '')
+}
 
 async function downloadImage() {
     const url = 'https://cataas.com/cat/cute'
