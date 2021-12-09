@@ -97,7 +97,6 @@ methods.getDuck = async function getDuck(client, message) {
     if (type == 'mp4' || type == 'gif') {
         Sender.sendVideoGif(client, message, 'duck.' + type)
     } else if (type == 'jpg' || type == 'jpeg' || type == 'PNG' || type == 'webm') {
-        console.log('a');
         Sender.sendImageName(client, message, 'duck.' + type)
     }
 }

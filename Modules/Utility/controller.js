@@ -8,6 +8,7 @@ const Path = require('path')
 const fs = require('fs');
 const JustWatch = require('./justwatch.js');
 const Currency = require('./currency.js');
+const Polly = require('./polly.js');
 
 var methods = {};
 
@@ -129,6 +130,18 @@ methods.getCurrency = async function getCurrency(client, message) {
         console.log(currencys);
         var result = await Currency.data.getCurrency(currencys)
         Sender.sendMessage(client, message, `*${result}*`, '*Conversor*')
+    }
+
+}
+
+methods.getPolly = async function getPolly(client, message) {
+    var body = message.body.replace('#fala', '');
+    if (body == '') {
+        Sender.sendMessage(client, message, `Digite *#fala texo* \n\n`, '*Polly*')
+    } else if (body.trim() == 'ajuda') {
+        Sender.sendMessage(client, message, `*Digite #fala texo`, '*Conversor*')
+    } else if (body.trim() != '') {
+        var result = await Polly.data.getPolly(client, message, body.trim())
     }
 
 }

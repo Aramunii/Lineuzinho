@@ -122,12 +122,31 @@ module.exports = {
 
 
   },
+
   async sendVideoGif(client, message, image) {
     await client
       .sendVideoAsGif(
         message.from,
         'Modules/images/' + image,
         'img.gif',
+        '\n\n 🥸 ```Lineuzinho```',
+        message.id.toString()
+      )
+      .then((result) => {
+        console.log('Result: ', result); //return object success
+      })
+      .catch((erro) => {
+        //  this.sendMessage(client, message, 'Ocorreu um erro tente novamente mais tarde! ou reporte o erro!')
+        console.error('Error when sending: ', erro); //return object error
+      });
+  },
+  
+  async sendFile(client, message, file) {
+    await client
+      .sendFile(
+        message.from,
+        'Modules/audios/' + file,
+        'audio.mp3',
         '\n\n 🥸 ```Lineuzinho```',
         message.id.toString()
       )

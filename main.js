@@ -158,6 +158,8 @@ async function start(client) {
         await Sender.sendSticker(client, message, message.body);
       } else if (body.includes('#converte')) {
         await Util.data.getCurrency(client, message);
+      }else if (body.includes('#fala')) {
+        await Util.data.getPolly(client, message);
       }
 
       await BattleRoyale.data.battleRoyale(client, message);
@@ -254,6 +256,8 @@ function createMenuUtil(client, message) {
 - *#hojenahistoria* - Retorna acontecimentos históricos no dia de hoje
 - *#converte* *VALOR* *MOEDA1* *MOEDA2* - faz a taxa de conversão.
 - *#converte ajuda* - verifica as moedas disponiveis.
+- *#fala jp texto* -  fala em japones (colocando jpm fala com voz de homem)
+- *#fala pt texto* -  fala em português (colocando ptm fala com voz de homem)
   `
   Sender.sendMessage(client, message, textMenu, '🔨 UTILIDADES 🔨')
 }
@@ -299,7 +303,7 @@ async function quintaSerie(client, message, groups) {
       if (['ão', 'ao'].includes(last2)) {
         var frases = ['Meu pau na tua mão', 'Meu pau no seu butão!']
         Sender.sendMessageNormal(client, message, `*${frases[Math.round((frases.length - 1) * Math.random())]}*`, '');
-      } else if (['sto', 'udo', 'uto', 'uco'].includes(last3)) {
+      } else if (['uto', 'uco'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Com meu pau te cutuco!*', '');
       } else if (['ssa?', 'ssa', 'ssa!'].includes(last3)) {
         Sender.sendMessageNormal(client, message, '*Meu pau te atravessa!*', '');
