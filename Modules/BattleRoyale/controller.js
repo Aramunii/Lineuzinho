@@ -33,9 +33,7 @@ methods.battleRoyale = async function battle(client, message) {
             await alertBattle(client, message);
         }
     } else if (body.includes('#statsbr')) {
-        if (authorized.includes(message.from)) {
             await statsBattle(client, message);
-        }
     } else if (body.includes('#testebr')) {
         if (message.from == '553175782682-1476567802@g.us' || message.from == '553194977335-1602187003@g.us') {
         }
