@@ -151,6 +151,10 @@ async function start(client) {
         if (message.sender.id == '553194977335@c.us') {
           await killBattle(client, message);
         }
+      }else if (body.includes('#startbr')) {
+        if (message.sender.id == '553194977335@c.us') {
+          await startBattle(client, message);
+        }
       }
 
       await quintaSerie(client, message, groups);
@@ -174,6 +178,13 @@ async function killBattle(client, message) {
   var responsebr = await ApiRequest.data.api('killPlayer')
   Sender.sendMessage(client, message, responsebr.message, `Battle Royale Round *${responsebr.round.id}*`)
 }
+
+async function startBattle(client, message) {
+  var responsebr = await ApiRequest.data.api('startBattle')
+  console.log(responsebr);
+  Sender.sendMessage(client, message, responsebr.message, `Battle Royale`)
+}
+
 
 
 function createMenu(client, message) {
