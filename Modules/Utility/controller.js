@@ -7,7 +7,7 @@ const Steam = require('./steam.js');
 const Path = require('path')
 const fs = require('fs');
 const JustWatch = require('./justwatch.js');
-const { cli } = require('winston/lib/winston/config');
+const Currency = require('./currency.js');
 
 var methods = {};
 
@@ -33,7 +33,7 @@ methods.getMovie = async function getMovie(client, message) {
     Sender.sendImage(client, message, movie, '🎬 Filmes e séries 🎬');
 }
 
-methods.getMovieSearch = async function getMovieSearch(client, message,search) {
+methods.getMovieSearch = async function getMovieSearch(client, message, search) {
     Sender.sendMessage(client, message, 'Aguarde... estou procurando para você', '🎬 Filmes e séries 🎬');
     var movie = await movieRandom.data.getMovieSearch(search);
     Sender.sendImage(client, message, movie, '🎬 Filmes e séries 🎬');
@@ -117,6 +117,21 @@ methods.TodayHistory = async function TodayHistory(client, message) {
 
 }
 
+methods.getCurrency = async function getCurrency(client, message) {
+    var body = message.body.replace('#converte', '');
+    if (body == '') {
+        Sender.sendMessage(client, message, `Digite *#converte VALOR MOEDA1 MOEDA2* \n\n *#converte ajuda*  para ver as moedas`, '*Conversor*')
+    } else if (body.trim() == 'ajuda') {
+        var result = await Currency.data.getNames();
+        Sender.sendMessage(client, message, `*Digite #converte VALOR MOEDA1 MOEDA2* \n\n ${result} `, '*Conversor*')
+    } else if (body.trim() != '') {
+        var currencys = body.split(' ');
+        console.log(currencys);
+        var result = await Currency.data.getCurrency(currencys)
+        Sender.sendMessage(client, message, `*${result}*`, '*Conversor*')
+    }
+
+}
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -130,6 +145,8 @@ function diffDays(date) {
 
     return diffDays + ' dias';
 }
+
+
 
 
 

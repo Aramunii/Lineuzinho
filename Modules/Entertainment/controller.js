@@ -76,15 +76,32 @@ methods.getDog = async function getDog(client, message) {
     link = link.url
     var type = link.split('.')[2]
 
-    await downloadImageDog(link, type);
+    await downloadImageDog(link, 'dog.' + type);
     if (type == 'mp4' || type == 'gif') {
         Sender.sendVideoGif(client, message, 'dog.' + type)
     } else if (type == 'jpg' || type == 'jpeg' || type == 'PNG' || type == 'webm') {
         console.log('a');
         Sender.sendImageName(client, message, 'dog.' + type)
     }
-
 }
+
+
+methods.getDuck = async function getDuck(client, message) {
+    const url = 'https://random-d.uk/api/v2/quack'
+    const responseDog = await axios.get(url);
+    var link = responseDog.data;
+    link = link.url
+    var type = link.split('.')[2]
+
+    await downloadImageDog(link, 'duck.' + type);
+    if (type == 'mp4' || type == 'gif') {
+        Sender.sendVideoGif(client, message, 'duck.' + type)
+    } else if (type == 'jpg' || type == 'jpeg' || type == 'PNG' || type == 'webm') {
+        console.log('a');
+        Sender.sendImageName(client, message, 'duck.' + type)
+    }
+}
+
 
 
 methods.desmotive = async function desmotive(client, message) {
@@ -149,7 +166,7 @@ methods.desmotive = async function desmotive(client, message) {
 
 async function downloadImageDog(url, type) {
 
-    const path = 'Modules/images/' + 'dog.' + type
+    const path = 'Modules/images/' + type
     const writer = fs.createWriteStream(path)
     const response = await axios.get(url, {
         responseType: 'stream'

@@ -121,6 +121,8 @@ async function start(client) {
         await Entertainment.data.getCat(client, message);
       } else if (body.includes('#dog')) {
         await Entertainment.data.getDog(client, message);
+      } else if (body.includes('#quack')) {
+        await Entertainment.data.getDuck(client, message);
       } else if (body.includes('#inutil')) {
         await Entertainment.data.getRandomFact(client, message);
       } else if (body.includes('#espaço')) {
@@ -154,9 +156,11 @@ async function start(client) {
         await Entertainment.data.desmotive(client, message);
       } else if (message.caption == '#s') {
         await Sender.sendSticker(client, message, message.body);
+      } else if (body.includes('#converte')) {
+        await Util.data.getCurrency(client, message);
       }
 
-       await BattleRoyale.data.battleRoyale(client,message);
+      await BattleRoyale.data.battleRoyale(client, message);
 
       await quintaSerie(client, message, groups);
 
@@ -227,6 +231,7 @@ async function createMenuEntertain(client, message) {
 - *#jogodobicho* - Retorna os números para jogar na mega!. 
 - *#gato* - Envia uma foto de um gato!.
 - *#dog* - Envia uma foto de um cachorro!.
+- *#quack* - Envia uma foto de um pato!.
 - *#inutil* - Envia um Fato inutil da vida.
 - *#desmotiva* - Coach reverso!
 
@@ -247,6 +252,8 @@ function createMenuUtil(client, message) {
 - *#paramount* - Retorna novidades da Paramount
 - *#starplus* - Retorna novidades da Star Plus
 - *#hojenahistoria* - Retorna acontecimentos históricos no dia de hoje
+- *#converte* *VALOR* *MOEDA1* *MOEDA2* - faz a taxa de conversão.
+- *#converte ajuda* - verifica as moedas disponiveis.
   `
   Sender.sendMessage(client, message, textMenu, '🔨 UTILIDADES 🔨')
 }
