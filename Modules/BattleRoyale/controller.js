@@ -17,9 +17,7 @@ methods.battleRoyale = async function battle(client, message) {
     var authorized = ['120363021135341637@g.us', '553175782682-1476567802@g.us', '553194977335-1602187003@g.us']
 
     if (body.includes('#battleroyale')) {
-        if (authorized.includes(message.from)) {
             await battleRoyale(client, message);
-        }
     } else if (body.includes('#matarbr')) {
         if (message.sender.id == '553194977335@c.us') {
             await killBattle(client, message);
