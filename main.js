@@ -119,6 +119,8 @@ async function start(client) {
         await Entertainment.data.desciclopedia(client, message);
       } else if (body.includes('#gato')) {
         await Entertainment.data.getCat(client, message);
+      } else if (body.includes('#dog')) {
+        await Entertainment.data.getDog(client, message);
       } else if (body.includes('#inutil')) {
         await Entertainment.data.getRandomFact(client, message);
       } else if (body.includes('#espaço')) {
@@ -224,6 +226,7 @@ async function createMenuEntertain(client, message) {
 - *#megasena* - Retorna os números para jogar na mega!. 
 - *#jogodobicho* - Retorna os números para jogar na mega!. 
 - *#gato* - Envia uma foto de um gato!.
+- *#dog* - Envia uma foto de um cachorro!.
 - *#inutil* - Envia um Fato inutil da vida.
 - *#desmotiva* - Coach reverso!
 

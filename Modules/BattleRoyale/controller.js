@@ -14,7 +14,7 @@ methods.battleRoyale = async function battle(client, message) {
         body = message.body.toLowerCase();
     }
 
-    var authorized = ['120363021135341637@g.us', '553175782682-1476567802@g.us', '553194977335-1602187003@g.us']
+    var authorized = ['120363021135341637@g.us']
 
     if (body.includes('#battleroyale')) {
             await battleRoyale(client, message);

@@ -69,6 +69,24 @@ methods.getCat = async function getCat(client, message) {
     Sender.sendImageName(client, message, 'gato.jpg')
 }
 
+methods.getDog = async function getDog(client, message) {
+    const url = 'https://random.dog/woof.json'
+    const responseDog = await axios.get(url);
+    var link = responseDog.data;
+    link = link.url
+    var type = link.split('.')[2]
+
+    await downloadImageDog(link, type);
+    if (type == 'mp4' || type == 'gif') {
+        Sender.sendVideoGif(client, message, 'dog.' + type)
+    } else if (type == 'jpg' || type == 'jpeg' || type == 'PNG' || type == 'webm') {
+        console.log('a');
+        Sender.sendImageName(client, message, 'dog.' + type)
+    }
+
+}
+
+
 methods.desmotive = async function desmotive(client, message) {
     var desmotiv = [
         "“Hoje é o primeiro dia do resto da sua vida. Mas ontem também foi, e veja como acabou.”",
@@ -121,12 +139,30 @@ methods.desmotive = async function desmotive(client, message) {
         "“Trabalhe duro, reclame ainda mais. “",
         "“Eu não quero fazer coisas. As coisas são uma merda.”",
         "“Nunca é tarde para voltar para a cama.”",
-       "“Não se preocupe, nada nunca estará tão ruim que não possa piorar”",
+        "“Não se preocupe, nada nunca estará tão ruim que não possa piorar”",
     ]
 
     var currNum = Math.round((desmotiv.length - 1) * Math.random());
     var text = `*${desmotiv[currNum]}*`
     Sender.sendMessage(client, message, text, '')
+}
+
+async function downloadImageDog(url, type) {
+
+    const path = 'Modules/images/' + 'dog.' + type
+    const writer = fs.createWriteStream(path)
+    const response = await axios.get(url, {
+        responseType: 'stream'
+    })
+
+    response.data.pipe(writer)
+
+
+    return new Promise((resolve, reject) => {
+        writer.on('finish', resolve)
+        writer.on('error', reject)
+    })
+
 }
 
 async function downloadImage() {
