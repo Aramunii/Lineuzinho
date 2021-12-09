@@ -59,12 +59,14 @@ async function startBattle(client, message) {
     var responsebr = await ApiRequest.data.api('startBattle')
     console.log(responsebr);
     Sender.sendMessage(client, message, responsebr.message, `Battle Royale`)
+    client.setGroupProperty(message.from, 'announcement', true)
 }
 
 async function alertBattle(client, message) {
     var responsebr = await ApiRequest.data.api('alertBattle')
     console.log(responsebr);
     Sender.sendMessageMentioned(client, message, responsebr.message, `Battle Royale`, responsebr.mentioneds)
+    client.setGroupProperty(message.from, 'announcement', false)
 }
 
 async function statsBattle(client, message) {
