@@ -7,10 +7,12 @@ const Sender = require('./Modules/sender.js')
 const Jojo = require('./Modules/Jojo/controller.js')
 const Entertainment = require('./Modules/Entertainment/controller.js')
 const Util = require('./Modules/Utility/controller.js');
+const BattleRoyale = require('./Modules/BattleRoyale/controller.js');
 //const wa = require('@open-wa/wa-automate');
 
 var user = [];
 var groups = [];
+
 wppconnect
   .create({
     session: 'ZapWatch22',
@@ -20,6 +22,7 @@ wppconnect
   })
   .then((client) => start(client))
   .catch((error) => console.log(error));
+
 /*
 wa.create({
   sessionId: "Lineuzinho",
@@ -32,6 +35,9 @@ wa.create({
   logConsole: true,
   popup: true,
   useChrome: true,
+      chromeOptions: {
+      userDataDir: './tokens/ZapWatch22', // or your custom directory
+    },
   qrTimeout: 0, //0 means it will wait forever for you to scan the qr code
 }).then(client => start(client));
 */
@@ -40,6 +46,7 @@ async function start(client) {
 
   client.onMessage(async (message) => {
     try {
+      console.log(message);
       var user_id = message.sender.id;
       var pushname = message.sender.pushname
       groups = await client.getAllGroups();
@@ -143,19 +150,11 @@ async function start(client) {
         Sender.sendMessage(client, message, responseg.message, '*QUINTA SÉRIE*')
       } else if (body.includes('#desmotiva')) {
         await Entertainment.data.desmotive(client, message);
-      } else if (body.includes('#battleroyale')) {
-        if (message.from == '553175782682-1476567802@g.us' || message.from == '553194977335-1602187003@g.us') {
-          await battleRoyale(client, message);
-        }
-      } else if (body.includes('#matarbr')) {
-        if (message.sender.id == '553194977335@c.us') {
-          await killBattle(client, message);
-        }
-      }else if (body.includes('#startbr')) {
-        if (message.sender.id == '553194977335@c.us') {
-          await startBattle(client, message);
-        }
+      } else if (message.caption == '#s') {
+        await Sender.sendSticker(client, message, message.body);
       }
+
+       await BattleRoyale.data.battleRoyale(client,message);
 
       await quintaSerie(client, message, groups);
 

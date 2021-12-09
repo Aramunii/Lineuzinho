@@ -1,6 +1,16 @@
 const Path = require('path')
 
 module.exports = {
+  async sendMessageMentioned(client, message, text, title, mentioned) {
+    client
+      .sendMentioned(message.from, title + '\n\n' + text + ' \n\n 🥸 ```Lineuzinho```', mentioned)
+      .then((result) => {
+        console.log('Result: ', result); //return object success
+      })
+      .catch((erro) => {
+        console.error('Error when sending: ', erro); //return object error
+      });
+  },
   async sendMessageNormalGroups(client, group, text, title, attackers) {
     console.log(group);
     client
@@ -140,7 +150,7 @@ module.exports = {
 
   async sendSticker(client, message, text) {
     await client
-      .sendImageAsSticker(message.from, "")
+      .sendImageAsSticker(message.from, Path.resolve(__dirname, 'images', 'belinao.jpg'))
       .then((result) => {
         console.log('Result: ', result); //return object success
       })
