@@ -7,8 +7,6 @@ const Sender = require('./Modules/sender.js')
 const Jojo = require('./Modules/Jojo/controller.js')
 const Entertainment = require('./Modules/Entertainment/controller.js')
 const Util = require('./Modules/Utility/controller.js');
-const { cli } = require('winston/lib/winston/config');
-const { response } = require('express');
 //const wa = require('@open-wa/wa-automate');
 
 var user = [];
@@ -146,10 +144,13 @@ async function start(client) {
       } else if (body.includes('#desmotiva')) {
         await Entertainment.data.desmotive(client, message);
       } else if (body.includes('#battleroyale')) {
-        await battleRoyale(client,message);
-      }else if(body.includes('#matarbr'))
-      {
-          await killBattle(client,message);
+        if (message.from == '553175782682-1476567802@g.us' || message.from == '553194977335-1602187003@g.us') {
+          await battleRoyale(client, message);
+        }
+      } else if (body.includes('#matarbr')) {
+        if (message.sender.id == '553194977335@c.us') {
+          await killBattle(client, message);
+        }
       }
 
       await quintaSerie(client, message, groups);
@@ -161,19 +162,17 @@ async function start(client) {
   });
 }
 
-async function battleRoyale(client,message)
-{
+async function battleRoyale(client, message) {
   var user_id = message.sender.id;
   var group_id = message.from;
-  var responsebr = await ApiRequest.data.api('registerBattle', { user_id,group_id})
+  var responsebr = await ApiRequest.data.api('registerBattle', { user_id, group_id })
   console.log(responsebr);
-  Sender.sendMessage(client,message,`Stands na rodada:${responsebr.players}\n\n ` + responsebr.message,`Battle Royale Round *${responsebr.round.id}*`)
+  Sender.sendMessage(client, message, `*Stands vivos nesta rodada:* ${responsebr.players}\n\n` + responsebr.message, `Battle Royale \n\nRound *${responsebr.round.id}*`)
 }
 
-async function killBattle(client,message)
-{
+async function killBattle(client, message) {
   var responsebr = await ApiRequest.data.api('killPlayer')
-  Sender.sendMessage(client,message,responsebr.message,`Battle Royale Round *${responsebr.round.id}*`)
+  Sender.sendMessage(client, message, responsebr.message, `Battle Royale Round *${responsebr.round.id}*`)
 }
 
 
