@@ -207,10 +207,13 @@ async function createMenuJojo(client, message) {
 - *#stand* @usuario - Retorna o stand da pessoa marcada. 
 - *#definirstand* - Define seu stand aleatoriamente *NO PRIVADO*. 
 - *#redefinirstand* - Redefine seu stand aleatoriamente *NO PRIVADO*. 
-- *#inimigo* - Exibe o inimigo atual. 
-- *#atacar* - Realiza ataque ao inimigo *UMA VEZ POR INIMIGO*. 
+- *#battleroyale* - Entra no Round atual se tiver.
+- *#statsbr* - Verifica o status do round atual.
 
-  `
+GRUPO PARA JOGAR: 
+https://chat.whatsapp.com/HaMLdzRCYBwF2VoQHT7Bo7
+
+`
   Sender.sendMessage(client, message, textMenu, '🕺🏻 JOJO GAME 💃')
 }
 

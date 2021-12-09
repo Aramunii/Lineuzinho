@@ -2,7 +2,8 @@ const axios = require('axios');
 const ApiRequest = require('../../api.js');
 const cheerio = require('cheerio');
 const Stand = require('../../stand.js');
-const Sender = require('../sender.js')
+const Sender = require('../sender.js');
+const { cli } = require('winston/lib/winston/config');
 
 
 var methods = {};
@@ -13,8 +14,10 @@ methods.battleRoyale = async function battle(client, message) {
         body = message.body.toLowerCase();
     }
 
+    var authorized = ['120363021135341637@g.us', '553175782682-1476567802@g.us', '553194977335-1602187003@g.us']
+
     if (body.includes('#battleroyale')) {
-        if (message.from == '553175782682-1476567802@g.us' || message.from == '553194977335-1602187003@g.us') {
+        if (authorized.includes(message.from)) {
             await battleRoyale(client, message);
         }
     } else if (body.includes('#matarbr')) {
@@ -30,13 +33,18 @@ methods.battleRoyale = async function battle(client, message) {
             await alertBattle(client, message);
         }
     } else if (body.includes('#statsbr')) {
-        if (message.from == '553175782682-1476567802@g.us' || message.from == '553194977335-1602187003@g.us') {
+        if (authorized.includes(message.from)) {
             await statsBattle(client, message);
+        }
+    } else if (body.includes('#testebr')) {
+        if (message.from == '553175782682-1476567802@g.us' || message.from == '553194977335-1602187003@g.us') {
         }
     }
 
 
 }
+
+
 
 async function battleRoyale(client, message) {
     var user_id = message.sender.id;

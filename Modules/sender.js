@@ -36,6 +36,17 @@ module.exports = {
         console.error('Error when sending: ', erro); //return object error
       });
   },
+  async sendMessageTo(client, number, text, title) {
+    client
+      .sendText(number, title + '\n\n' + text + ' \n\n 🥸 ```Lineuzinho```')
+      .then((result) => {
+        // console.log('Result: ', result); //return object success
+      })
+      .catch((erro) => {
+        console.error('Error when sending: ', erro); //return object error
+      });
+
+  },
 
   async sendMessage(client, message, text, title) {
     /*
