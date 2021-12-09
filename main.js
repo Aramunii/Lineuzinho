@@ -260,7 +260,12 @@ Olá *${message.sender.pushname}*\n
 *Level:* ${user.level}
 *Exp:* ${user.exp}/${user.exp_max}
 *Moedinhas:* ${user.gold}
- 
+
+*Battle Royale*
+
+*🏆 Venceu:* ${user.playerWinner}
+*☠️ Matou:* ${user.playerKills}
+*⚰️ Morreu:* ${user.playerDeath}
   
     `
   Sender.sendMessage(client, message, textMenu, '👤 MEU PERFIL 👤')
