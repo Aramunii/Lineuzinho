@@ -33,6 +33,7 @@ methods.getPolly = async function getPolly(client, message, text) {
         { name: 'jpm', voice: 'Takumi', engine: 'neural' },
         { name: 'ko', voice: 'Seoyeon', engine: 'neural' },
         { name: 'es', voice: 'Lucia', engine: 'neural' },
+        { name: 'esn', voice: 'Lupe', engine: 'neural' },
         { name: 'ptm', voice: 'Ricardo', engine: 'standard' },
         { name: 'jp', voice: 'Mizuki', engine: 'standard' },
         { name: 'arb', voice: 'Zeina', engine: 'standard' },
