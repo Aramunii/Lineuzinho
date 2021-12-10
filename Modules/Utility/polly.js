@@ -46,7 +46,6 @@ methods.getPolly = async function getPolly(client, message, text) {
         { name: 'de', voice: 'Vicki', engine: 'standard' },
         { name: 'itm', voice: 'Giorgio', engine: 'standard' },
         { name: 'za', voice: 'Ayanda', engine: 'standard' },
-
     ]
 
     people = languages.filter(element => {
@@ -61,8 +60,6 @@ methods.getPolly = async function getPolly(client, message, text) {
     })
 
     var engine = people[0].engine;
-
-
 
     if (typeSpeak == 'news') {
         splited = splited.filter(function (item) {
@@ -88,21 +85,7 @@ methods.getPolly = async function getPolly(client, message, text) {
         'TextType': 'ssml'
     }
 
-    await Polly.synthesizeSpeech(params, (err, data) => {
-        if (err) {
-            console.log(err.code)
-            Sender.sendMessage(client, message, 'Ocorreu um erro! verifique o que você digitou e tente novamente!\n\n' + err, '*ERRO*')
-        } else if (data) {
-            if (data.AudioStream instanceof Buffer) {
-                fs.writeFile("Modules/audios/audio.mp3", data.AudioStream, function (err) {
-                    if (err) {
-                        return console.log(err)
-                    }
-                    Sender.sendFile(client, message, 'audio.mp3')
-                })
-            }
-        }
-    })
+    
 
     return true;
 }
