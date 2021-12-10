@@ -17,13 +17,37 @@ methods.getPolly = async function getPolly(client, message, text) {
         return item !== language
     }, language)
 
-    var languages = [{ name: 'pt', voice: 'Camila' }, { name: 'ptm', voice: 'Ricardo' }, { name: 'jp', voice: 'Mizuki' }, { name: 'jpm', voice: 'Takumi' }]
+    var languages = [
+        { name: 'pt', voice: 'Camila' },
+        { name: 'ptm', voice: 'Ricardo' },
+        { name: 'jp', voice: 'Mizuki' },
+        { name: 'jpm', voice: 'Takumi' },
+        { name: 'arb', voice: 'Zeina' },
+        { name: 'cmn', voice: 'Zhiyu' },
+        { name: 'da', voice: 'Naja' },
+        { name: 'dam', voice: 'Mads' },
+        { name: 'nl', voice: 'Lotte' },
+        { name: 'nlm', voice: 'Ruben' },
+        { name: 'gb', voice: 'Emma' },
+        { name: 'gbm', voice: 'Brian' },
+        { name: 'ein', voice: 'Raveena' },
+        { name: 'en', voice: 'Joanna' },
+        { name: 'enm', voice: 'Matthew' },
+        { name: 'fr', voice: 'Léa' },
+        { name: 'de', voice: 'Vicki' },
+        { name: 'it', voice: 'Bianca' },
+        { name: 'itm', voice: 'Giorgio' },
+        { name: 'ko', voice: 'Seoyeon' },
+        { name: 'es', voice: 'Lucia' },
+        { name: 'za', voice: 'Ayanda' },
+        
+    ]
 
     people = languages.filter(element => {
         return element.name == language
     }, language)
 
-    console.log(splited,people,language)
+    console.log(splited, people, language)
 
     const Polly = new AWS.Polly({
         signatureVersion: 'v4',

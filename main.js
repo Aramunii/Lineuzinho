@@ -158,7 +158,7 @@ async function start(client) {
         await Sender.sendSticker(client, message, message.body);
       } else if (body.includes('#converte')) {
         await Util.data.getCurrency(client, message);
-      }else if (body.includes('#fala')) {
+      } else if (body.includes('#fala')) {
         await Util.data.getPolly(client, message);
       }
 
