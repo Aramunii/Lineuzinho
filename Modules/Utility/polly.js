@@ -18,29 +18,31 @@ methods.getPolly = async function getPolly(client, message, text) {
     }, language)
 
     var languages = [
-        { name: 'pt', voice: 'Camila' },
-        { name: 'ptm', voice: 'Ricardo' },
-        { name: 'jp', voice: 'Mizuki' },
-        { name: 'jpm', voice: 'Takumi' },
-        { name: 'arb', voice: 'Zeina' },
-        { name: 'cmn', voice: 'Zhiyu' },
-        { name: 'da', voice: 'Naja' },
-        { name: 'dam', voice: 'Mads' },
-        { name: 'nl', voice: 'Lotte' },
-        { name: 'nlm', voice: 'Ruben' },
-        { name: 'gb', voice: 'Emma' },
-        { name: 'gbm', voice: 'Brian' },
-        { name: 'ein', voice: 'Raveena' },
-        { name: 'en', voice: 'Joanna' },
-        { name: 'enm', voice: 'Matthew' },
-        { name: 'fr', voice: 'Léa' },
-        { name: 'de', voice: 'Vicki' },
-        { name: 'it', voice: 'Bianca' },
-        { name: 'itm', voice: 'Giorgio' },
-        { name: 'ko', voice: 'Seoyeon' },
-        { name: 'es', voice: 'Lucia' },
-        { name: 'za', voice: 'Ayanda' },
-        
+        { name: 'pt', voice: 'Camila', engine: 'neural' },
+        { name: 'gb', voice: 'Emma', engine: 'neural' },
+        { name: 'gbm', voice: 'Brian', engine: 'neural' },
+        { name: 'au', voice: 'Olivia', engine: 'neural' },
+        { name: 'za', voice: 'Ayanda', engine: 'neural' },
+        { name: 'en', voice: 'Joanna', engine: 'neural' },
+        { name: 'enm', voice: 'Matthew', engine: 'neural' },
+        { name: 'fr', voice: 'Léa', engine: 'neural' },
+        { name: 'it', voice: 'Bianca', engine: 'neural' },
+        { name: 'jpm', voice: 'Takumi', engine: 'neural' },
+        { name: 'ko', voice: 'Seoyeon', engine: 'neural' },
+        { name: 'es', voice: 'Lucia', engine: 'neural' },
+        { name: 'ptm', voice: 'Ricardo', engine: 'standard' },
+        { name: 'jp', voice: 'Mizuki', engine: 'standard' },
+        { name: 'arb', voice: 'Zeina', engine: 'standard' },
+        { name: 'cmn', voice: 'Zhiyu', engine: 'standard' },
+        { name: 'da', voice: 'Naja', engine: 'standard' },
+        { name: 'dam', voice: 'Mads', engine: 'standard' },
+        { name: 'nl', voice: 'Lotte', engine: 'standard' },
+        { name: 'nlm', voice: 'Ruben', engine: 'standard' },
+        { name: 'ein', voice: 'Raveena', engine: 'standard' },
+        { name: 'de', voice: 'Vicki', engine: 'standard' },
+        { name: 'itm', voice: 'Giorgio', engine: 'standard' },
+        { name: 'za', voice: 'Ayanda', engine: 'standard' },
+
     ]
 
     people = languages.filter(element => {
@@ -51,18 +53,21 @@ methods.getPolly = async function getPolly(client, message, text) {
 
     const Polly = new AWS.Polly({
         signatureVersion: 'v4',
-        region: 'us-east-1'
+        region: 'us-east-1',
     })
 
     let params = {
-        'Text': splited.join(' '),
+        'Engine': people[0].engine,
+        'Text': '<speak> ' + replaceAll(splited.join(' '),'##',' <break time="1s"/> ') + '</speak>',
         'OutputFormat': 'mp3',
-        'VoiceId': people[0].voice
+        'VoiceId': people[0].voice,
+        'TextType': 'ssml'
     }
 
     await Polly.synthesizeSpeech(params, (err, data) => {
         if (err) {
             console.log(err.code)
+            Sender.sendMessage(client,message,'Ocorreu um erro! verifique o que você digitou e tente novamente!\n\n' + err,'*ERRO*')
         } else if (data) {
             if (data.AudioStream instanceof Buffer) {
                 fs.writeFile("Modules/audios/audio.mp3", data.AudioStream, function (err) {
@@ -77,6 +82,10 @@ methods.getPolly = async function getPolly(client, message, text) {
 
     return true;
 }
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
+  }
 
 methods.getSpeech = async function getSpeech() {
 
