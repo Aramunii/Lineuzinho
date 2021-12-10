@@ -20,7 +20,7 @@ methods.getPolly = async function getPolly(client, message, text) {
 
     var languages = [
         { name: 'pt', voice: 'Camila', engine: 'neural' },
-        { name: 'gb', voice: 'Emma', engine: 'neural' },
+        { name: 'gb', voice: 'Amy', engine: 'neural' },
         { name: 'gbm', voice: 'Brian', engine: 'neural' },
         { name: 'au', voice: 'Olivia', engine: 'neural' },
         { name: 'za', voice: 'Ayanda', engine: 'neural' },
