@@ -9,6 +9,7 @@ const fs = require('fs');
 const JustWatch = require('./justwatch.js');
 const Currency = require('./currency.js');
 const Polly = require('./polly.js');
+const Lyrics = require('music-lyrics-node');
 
 var methods = {};
 
@@ -64,11 +65,8 @@ methods.getPeopleInSpace = async function getPeopleInSpace(client, message) {
         return `*${people.name}*\n*País:* ${capitalizeFirstLetter(people.country)}\n*Cargo:* ${people.title}\n*Dias no espaço:* ${diffDays(people.launchdate)}\n\n`;
     })
 
-
     text += peoples.join('\n');
-
     Sender.sendMessage(client, message, text, '👩🏻‍🚀 PESSOAS NO ESPAÇO 🚀')
-
 }
 
 methods.JustWatch = async function justWatch(client, message, type) {
@@ -144,6 +142,16 @@ methods.getPolly = async function getPolly(client, message) {
         var result = await Polly.data.getPolly(client, message, body.trim())
     }
 
+}
+
+methods.getLyric = async function getLyric(client, message) {
+    var body = message.body.replace('#musica', '');
+    if (body == '') {
+        Sender.sendMessage(client, message, `Digite *#musica nome da musica* \n\n`, '*Letras*')
+    } else if (body.trim() != '') {
+        var lyric = await Lyrics.getLyric(body.trim());
+        Sender.sendMessage(client,message,`${lyric[1]}\n${lyric[2]}\n${lyric[3]}\n\n${lyric[0]}`)
+    }   
 }
 
 function capitalizeFirstLetter(string) {

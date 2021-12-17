@@ -160,6 +160,8 @@ async function start(client) {
         await Util.data.getCurrency(client, message);
       } else if (body.includes('#fala')) {
         await Util.data.getPolly(client, message);
+      }else if (body.includes('#musica')) {
+        await Util.data.getLyric(client, message);
       }
 
       await BattleRoyale.data.battleRoyale(client, message);
