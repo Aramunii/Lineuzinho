@@ -151,7 +151,7 @@ methods.getLyric = async function getLyric(client, message) {
     } else if (body.trim() != '') {
         var lyric = await Lyrics.getLyric(body.trim());
         console.log(lyric);
-        Sender.sendMessage(client,message,`${lyric.song}\n${lyric.artist}\n${lyric.album}\n\n${lyric.lyric}`)
+        Sender.sendMessage(client,message,`*${lyric.song}*\n*${lyric.artist}*\n*${lyric.album}*\n\n${lyric.lyric}`, '*Letras*')
     }   
 }
 
